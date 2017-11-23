@@ -16,9 +16,10 @@ class ProblemController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $request->user()->authorizeRoles(['ogretmen','yonetici','hakem']);//bu sayfayı herkes görebilsin
+        return view('problem-form');
     }
 
     /**
