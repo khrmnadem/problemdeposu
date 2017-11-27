@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Problem;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,7 +26,15 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['ogretmen','yonetici','hakem']);//bu sayfayı herkes görebilsin
-        return view('home');
+
+        //Problemler veritabanından çekilecek
+        $problems = new Problem();
+        $id = Auth::id();
+        $datalist = $problems->where('user_id', $id)->get();
+
+        return view('home', array(
+            'datalist' => $datalist,
+        ));
     }
 
     /* *Örneğin adminin görebileceği bir sayfayı şöyle oluşturabiliriz:*

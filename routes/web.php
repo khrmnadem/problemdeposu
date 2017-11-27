@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/problem-ekle', array('as'=>'problem-ekle', 'uses'=>'ProblemController@index'));
+Route::post('/problem-ekle', array('as'=>'problem-kaydet', 'uses'=>'ProblemController@store'));

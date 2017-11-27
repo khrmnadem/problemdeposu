@@ -13,7 +13,18 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+                        @if(count($errors))
+                            <div class="alert alert-danger">
+                                <h4><b>HATA!</b></h4>
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                            <form class="form-horizontal" action="problem-ekle" method="POST" enctype="multipart/form-data">
+                                {{csrf_field()}}
                                 <div class="col-md-10 col-md-offset-1">
                                 <div class="form-group">
                                     <label for="ders">Ders</label>
@@ -75,7 +86,7 @@
                                               class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control btn btn-primary" type="submit" name="ekle" value="Kaydet">
+                                    <input class="form-control btn btn-success" type="submit" name="ekle" value="Kaydet">
                                 </div>
                                 </div>
                             </form>
