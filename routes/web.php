@@ -20,3 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/problem-ekle', array('as'=>'problem-ekle', 'uses'=>'ProblemController@index'));
 Route::post('/problem-ekle', array('as'=>'problem-kaydet', 'uses'=>'ProblemController@store'));
+Route::get('/yonetim', array('as'=>'yonetim', 'uses'=>'AdminController@index'));
+Route::get('/kullanici-ekle', array('as'=>'kullanici-ekle', 'uses'=>'AdminController@create'));
+Route::get('/kullanici-listesi', array('as'=>'kullanici-listesi', 'uses'=>'AdminController@userList'));

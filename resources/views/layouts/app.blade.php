@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css')  }}">
+
 </head>
 <body>
     <div id="app">
@@ -52,6 +54,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    @if(Auth::id() == 1)
+                                    <li>
+                                        <a href="yonetim">Yönetim Paneli</a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a href="problem-ekle">Problem Ekle</a>
                                     </li>
@@ -74,10 +81,17 @@
             </div>
         </nav>
 
+
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#kullanici-listesi').DataTable();
+        } );
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class AdminController extends Controller
 {
     /**
@@ -11,9 +11,15 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
+    {
+        $request->user()->authorizeRoles(['yonetici']);//sadece yoneticiler gorebilir
+        return view('yonetim');
     }
 
     /**
@@ -21,9 +27,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->user()->authorizeRoles(['yonetici']);//sadece yoneticiler gorebilir
+        return view('kullanici-ekle');
     }
 
     /**
@@ -80,5 +87,15 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function userList(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);//sadece yoneticiler gorebilir
+
+        $users = User::with('roles')->with('problems')->get();
+
+        return view('kullanici-listesi', array(
+            'users'=>$users
+        ));
     }
 }

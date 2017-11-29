@@ -31,10 +31,13 @@ class HomeController extends Controller
         $problems = new Problem();
         $id = Auth::id();
         $datalist = $problems->where('user_id', $id)->get();
-
-        return view('home', array(
-            'datalist' => $datalist,
-        ));
+        if($id == 1){
+            return redirect('yonetim');
+        }else {
+            return view('home', array(
+                'datalist' => $datalist
+            ));
+        }
     }
 
     /* *Örneğin adminin görebileceği bir sayfayı şöyle oluşturabiliriz:*

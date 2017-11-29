@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function problems(){
+        return $this->hasMany('App\Problem');
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
