@@ -16,20 +16,29 @@
 
                     <div class="col-md-10 col-md-offset-1">
                         @foreach($datalist as $data)
-                        <h4>{{$data->ders}}</h4>
-                        <h5>{{$data->unite}}</h5>
-                        <h6>{{$data->konu}}</h6>
-                        <p>{{$data->senaryo}}</p>
+                        <h4><b>Ders:</b> {{$data->ders}}</h4>
+                        <h5><b>Ünite:</b> {{$data->unite}}</h5>
+                        <h6><b>Konu:</b> {{$data->konu}}</h6>
+                        <p><b>Problem Senaryosu:</b> {{$data->senaryo}}</p>
                         @if($data->resim_yolu != 'storage/uploads/')
-                        <img src="{{url($data->resim_yolu)}}" alt="Açıklama Resmi">
+                        <b>Problem Resmi: </b><img class="thumbnail" src="{{url($data->resim_yolu)}}" alt="Açıklama Resmi">
                         @endif
-                        <p>{{$data->benzer}}</p>
-                        <p>{{$data->kaynak}}</p>
-                        <p>{{$data->malzeme}}</p>
-                        <p>{{$data->iletisim_kaynaklari}}</p>
-                        <p>{{$data->destek}}</p>
-                        <a href="{{$data->link}}">{{$data->link}}</a>
-                        <p>{{$data->keywords}}</p>
+                        <p><b>Benzer Problemler: </b>{{$data->benzer}}</p>
+                        <p><b>Bilgi Kaynakları: </b>{{$data->kaynak}}</p>
+                        <p><b>Çözümde Kullanılacak Malzemeler: </b>{{$data->malzeme}}</p>
+                        <p><b>İletişim Kaynakları: </b>{{$data->iletisim_kaynak}}</p>
+                        <p><b>Okul Dışı Destek Kanalları: </b>{{$data->destek}}</p>
+                        <b>Problemi Daha İyi Açıklayan Bağlantılar: </b>
+                            <?php $links = explode(',', $data->link); ?>
+                        @foreach($links as $link)
+                                <a href="{{$link}}">{{$link}}</a>
+                        @endforeach
+                        <br>
+                        <b>Anahtar Kelimeler: </b>
+                        <?php $keywords = explode(',', $data->keywords)?>
+                        @foreach($keywords as $keyword)
+                                <label class="label label-warning">{{$keyword}}</label>
+                        @endforeach
                         <hr>
                         @endforeach
                     </div>
