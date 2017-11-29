@@ -20,7 +20,9 @@
                         <h5>{{$data->unite}}</h5>
                         <h6>{{$data->konu}}</h6>
                         <p>{{$data->senaryo}}</p>
+                        @if($data->resim_yolu != 'storage/uploads/')
                         <img src="{{url($data->resim_yolu)}}" alt="Açıklama Resmi">
+                        @endif
                         <p>{{$data->benzer}}</p>
                         <p>{{$data->kaynak}}</p>
                         <p>{{$data->malzeme}}</p>
