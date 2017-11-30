@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Problem;
 class AdminController extends Controller
 {
     /**
@@ -96,6 +97,14 @@ class AdminController extends Controller
 
         return view('kullanici-listesi', array(
             'users'=>$users
+        ));
+    }
+
+    public function problemList(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);
+        $problems = Problem::with('user')->get();
+        return view('problem-listesi', array(
+            'problems'=>$problems
         ));
     }
 }
