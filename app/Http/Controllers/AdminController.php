@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 use App\Problem;
@@ -42,7 +43,17 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
+        $user->password=bcrypt($request->input('password'));
+        $user->save();
+        if($request->input('role')==1) {
+            $user->roles()->attach(Role::where('name', 'ogretmen')->first());
+        }elseif($request->input('role')==3){
+            $user->roles()->attach(Role::where('name', 'hakem')->first());
+        }
+
     }
 
     /**

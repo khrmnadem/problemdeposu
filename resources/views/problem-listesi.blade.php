@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             @if(Auth::id() == 1)
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="panel panel-default">
                         <div class="panel panel-heading">İşlemler</div>
                         <div class="panel panel-body">
@@ -18,7 +18,7 @@
                 </div>
             @endif
 
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">Yönetim</div>
 
@@ -38,6 +38,7 @@
                                     <th>Konu</th>
                                     <th>Senaryo</th>
                                     <th>Kim Yazdı</th>
+                                    <th>Onay Sayısı</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -47,6 +48,7 @@
                                     <th>Konu</th>
                                     <th>Senaryo</th>
                                     <th>Kim Yazdı</th>
+                                    <th>Onay Sayısı</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -59,6 +61,7 @@
                                         <td>
                                             {{$problem->user->name}}
                                         </td>
+                                        <td>{{$problem->onay_say}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

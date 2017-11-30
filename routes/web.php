@@ -24,3 +24,4 @@ Route::get('/yonetim', array('as'=>'yonetim', 'uses'=>'AdminController@index'));
 Route::get('/kullanici-ekle', array('as'=>'kullanici-ekle', 'uses'=>'AdminController@create'));
 Route::get('/kullanici-listesi', array('as'=>'kullanici-listesi', 'uses'=>'AdminController@userList'));
 Route::get('/problem-listesi', array('as'=>'problem-listesi', 'uses'=>'AdminController@problemList'));
+Route::post('/kullanici-ekle', array('as'=>'kullanici-ekle-post', 'uses'=>'AdminController@store'));
