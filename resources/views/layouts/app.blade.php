@@ -54,11 +54,25 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    @if(Auth::id() == 1)
+
+
+                                    <!-- Bu yönetici için -->
+                                    @foreach(Auth::user()->roles as $role)<!--çok önemli şeyler-->
+                                    @if($role->id == 2)
                                     <li>
                                         <a href="yonetim">Yönetim Paneli</a>
                                     </li>
                                     @endif
+                                    @endforeach
+
+                                    <!-- Bu da hakem için -->
+                                    @foreach(Auth::user()->roles as $role)
+                                    @if($role->id == 3)
+                                    <li>
+                                        <a href="hakem">Hakem Paneli</a>
+                                    </li>
+                                    @endif
+                                    @endforeach
                                     <li>
                                         <a href="problem-ekle">Problem Ekle</a>
                                     </li>
