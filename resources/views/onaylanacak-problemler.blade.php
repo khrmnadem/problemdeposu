@@ -61,7 +61,12 @@
                                             {{$problem->user->name}}
                                         </td>
                                         <td>{{$problem->onay_say}}</td>
-                                        <td><a class="btn btn-success" href="#">Onayla</a></td>
+                                        <td>
+                                            <form action="onay" method="POST">
+                                                {{csrf_field()}}
+                                                <input type="submit" value="Problem ID: {{$problem->id}} -> Onayla" name="btnOnayla" class="btn btn-sm btn-success">
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

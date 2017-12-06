@@ -96,4 +96,26 @@ class HakemController extends Controller
             'problems'=>$datalist
         ));
     }
+
+    public function onayla(Request $request){
+        //onay butonuna basıldığında onay sayısı bir artsın
+        $butondeger = $request->input('btnOnayla');
+        //echo "<pre> ".$butondeger." </pre>";
+        $parcabutondeger = explode('->', $butondeger);
+        $problemid = $parcabutondeger[0];
+        $id = explode(' ', $problemid);
+        //echo $id[2];
+        $onayla = $parcabutondeger[1];
+        //echo $onayla;
+        if(trim($onayla) == "Onayla"){
+            $problem = Problem::find($id[2]);
+            //echo $problem->onay_say;
+            $onaysay = $problem->onay_say;
+            $onaysay = $onaysay + 1;
+            $problem->onay_say = $onaysay;
+            $problem->save();
+        }else{
+            echo 'else e düştük';
+        }
+    }
 }

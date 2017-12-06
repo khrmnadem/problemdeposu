@@ -27,3 +27,4 @@ Route::get('/problem-listesi', array('as'=>'problem-listesi', 'uses'=>'AdminCont
 Route::post('/kullanici-ekle', array('as'=>'kullanici-ekle-post', 'uses'=>'AdminController@store'));
 Route::get('/hakem', array('as'=>'hakem', 'uses'=>'HakemController@index'));
 Route::get('/onay', array('as'=>'onay', 'uses'=>'HakemController@problemList'));
+Route::post('/onay', array('as'=>'onayla', 'uses'=>'HakemController@onayla'));
