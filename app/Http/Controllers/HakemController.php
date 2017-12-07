@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Problem;
+use App\Onay;
+use Illuminate\Support\Facades\Auth;
 
 class HakemController extends Controller
 {
@@ -91,7 +93,7 @@ class HakemController extends Controller
 
     public function problemList(){
         //Onay sayısı 2 den küçük olanları datalist değişkenine aktar
-        $datalist = Problem::where('onay_say', '<', 2)->get();
+        $datalist = Problem::where('onay_say', '<', 2)->with('onays')->get();
         return view('onaylanacak-problemler', array(
             'problems'=>$datalist
         ));
@@ -114,6 +116,12 @@ class HakemController extends Controller
             $onaysay = $onaysay + 1;
             $problem->onay_say = $onaysay;
             $problem->save();
+
+            //onay tablosuna giriş yapacak mı
+            $onay = new Onay();
+            $onay->user_id = Auth::id();
+            $onay->problem_id = $id[2];
+            $onay->save();
         }else{
             echo 'else e düştük';
         }

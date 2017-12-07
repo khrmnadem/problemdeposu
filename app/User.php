@@ -36,6 +36,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function onays(){
+        return $this->hasMany('App\Onay');
+    }
     /**
      * @param string|array $roles
      */

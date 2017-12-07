@@ -11,4 +11,8 @@ class Problem extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function onays(){
+        return $this->hasMany('App\Onay');
+    }
 }

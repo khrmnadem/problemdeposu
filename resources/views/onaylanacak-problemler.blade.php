@@ -62,10 +62,16 @@
                                         </td>
                                         <td>{{$problem->onay_say}}</td>
                                         <td>
-                                            <form action="onay" method="POST">
-                                                {{csrf_field()}}
-                                                <input type="submit" value="Problem ID: {{$problem->id}} -> Onayla" name="btnOnayla" class="btn btn-sm btn-success">
-                                            </form>
+                                            @foreach($problem->onays as $onay)
+                                                @if($onay->user_id == Auth::id())
+                                                    <label class="label label-warning">Onaylandı</label>
+                                                @else
+                                                    <form action="onay" method="POST">
+                                                        {{csrf_field()}}
+                                                        <input type="submit" value="Problem ID: {{$problem->id}} -> Onayla" name="btnOnayla" class="btn btn-sm btn-success">
+                                                    </form>
+                                                @endif
+                                            @endforeach
                                         </td>
                                     </tr>
                                 @endforeach
