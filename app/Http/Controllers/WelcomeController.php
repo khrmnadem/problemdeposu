@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Problem;
+use App\Onay;
 
 class WelcomeController extends Controller
 {
@@ -13,7 +15,11 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        //
+        //Onay sayısı 2 den büyük ve eşit olanları datalist değişkenine aktar
+        $datalist = Problem::where('onay_say', '>=', 2)->with('onays')->get();
+        return view('welcome', array(
+            'problems'=>$datalist
+        ));
     }
 
     /**

@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/', array('as'=>'anasayfa', 'uses'=>'WelcomeController@index'));
 
 Auth::routes();
 

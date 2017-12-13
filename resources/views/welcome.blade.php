@@ -1,89 +1,81 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
+@section('content')
+    <div class="container">
+        <h1>Ana Sayfa</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel panel-heading">Menü</div>
+                    <div class="panel panel-body">
+                        <ul>
+                            @foreach($problems as $problem)
+                            <li><a href="#">{{$problem->ders}}</a>
+                                <ul>
+                                    <li><a href="#">{{$problem->unite}}</a>
+                                        <ul>
+                                            <li><a href="#">{{$problem->konu}}</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-            @endif
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Tüm Problemler</div>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    {{ config('app.name', 'Laravel') }}
+                    <div class="panel-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <div class="col-md-12">
+                            <table id="kullanici-listesi" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Ders</th>
+                                    <th>Ünite</th>
+                                    <th>Konu</th>
+                                    <th>Senaryo</th>
+                                    <th>Kim Yazdı</th>
+                                    <th>Problemi Gör</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Ders</th>
+                                    <th>Ünite</th>
+                                    <th>Konu</th>
+                                    <th>Senaryo</th>
+                                    <th>Kim Yazdı</th>
+                                    <th>Problemi Gör</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                @foreach($problems as $problem)
+                                    <tr>
+                                        <td>{{$problem->ders}}</td>
+                                        <td>{{$problem->unite}}</td>
+                                        <td>{{$problem->konu}}</td>
+                                        <td>{{str_limit($problem->senaryo, 35)}}</td>
+                                        <td>
+                                            {{$problem->user->name}}
+                                        </td>
+                                        <td><a href="#" class="btn btn-primary">Problemi Gör</a></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection
