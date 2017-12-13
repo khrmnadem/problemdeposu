@@ -67,7 +67,7 @@
                                         <td>
                                             {{$problem->user->name}}
                                         </td>
-                                        <td><a href="#" class="btn btn-primary">Problemi Gör</a></td>
+                                        <td><a href="problem/{{$problem->id}}" class="btn btn-primary">Problemi Gör</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
