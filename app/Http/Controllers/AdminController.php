@@ -53,7 +53,7 @@ class AdminController extends Controller
         }elseif($request->input('role')==3){
             $user->roles()->attach(Role::where('name', 'hakem')->first());
         }
-
+        return redirect('/kullanici-ekle');
     }
 
     /**

@@ -92,11 +92,8 @@ class HakemController extends Controller
     }
 
     public function problemList(){
-        //Onay sayısı 2 den küçük olanları datalist değişkenine aktar
-        $datalist = Problem::where('onay_say', '<', 2)->with('onays')->get();
-        return view('onaylanacak-problemler', array(
-            'problems'=>$datalist
-        ));
+
+
     }
 
     public function onayla(Request $request){
@@ -122,6 +119,7 @@ class HakemController extends Controller
             $onay->user_id = Auth::id();
             $onay->problem_id = $id[2];
             $onay->save();
+            return redirect('/onay');
         }else{
             echo 'else e düştük';
         }
