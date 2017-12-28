@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Problem;
+use App\User;
 
 class Onay extends Model
 {
-    protected $table = 'onays';
-
     public function problem(){
         return $this->belongsTo('App\Problem');
     }

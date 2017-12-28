@@ -39,8 +39,12 @@
                                     <input class="form-control" type="text" name="konu" id="konu">
                                 </div>
                                 <div class="form-group">
+                                    <label for="senaryo-baslik">Problem Senaryosunun Başlığı</label>
+                                    <input class="form-control" type="text" name="senaryo-baslik" id="senaryo_baslik">
+                                </div>
+                                <div class="form-group">
                                     <label for="senaryo">Problem Senaryosu</label>
-                                    <textarea class="form-control" name="senaryo" id="senaryo" cols="30" rows="10"></textarea>
+                                    <textarea class="form-control" name="senaryo-icerik" id="senaryo" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="benzer">Benzer Problemler</label>
@@ -49,24 +53,33 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="kaynak">Bilgi Kaynakları</label>
-                                    <small>Bu problemi hazırlarken kullandığınız bilgi kaynakları</small>
-                                    <textarea name="kaynak" id="kaynak" cols="30" rows="10" class="form-control"></textarea>
+                                    <small>Bu problemi çözerken öğrencinin kullanabileceği bilgi kaynakları.</small>
+                                    <textarea name="bilgi-kaynak" id="kaynak" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="malzeme">Kullanılacak Malzemeler</label>
+                                    <label for="malzeme">Bilişsel Araçlar</label>
                                     <small>Bu problemin çözümünde kullanılacak malzemeler nelerdir?</small>
-                                    <textarea name="malzeme" id="malzeme" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="bilissel-araclar" id="malzeme" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="iletisim-kaynak">İletişim Kaynakları</label>
-                                    <small>Problemin çözümünde kullanılabilecek iletişim kaynakları neler? (Öğretmen mail adresi vb.)</small>
-                                    <textarea name="iletisim-kaynak" id="iletisim-kaynak" cols="30" rows="10"
+                                    <label for="malzeme">Öğretmenin Bu Problemdeki Rolü</label>
+                                    <small>Öğretmen bu problemde öğrenciye hangi role bürünerek yardımcı olacak?</small>
+                                    <select name="ogretmen-rol" id="">
+                                        <option value="Model" selected>Model Olma</option>
+                                        <option value="Bilişsel Koç">Bilişsel Koç Olma</option>
+                                        <option value="Öğretimsel Destek">Öğretimsel Destek Olma</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="iletisim-kaynak">İletişim ve İşbirliği Araçları</label>
+                                    <small>Öğrencilerin birbirleriyle ve öğretmenleriyle iletişim ve işbirliği yaparken kullanabileceği platformlar. (Google Drive gibi)</small>
+                                    <textarea name="iletisim-isbirligi-araclar" id="iletisim-kaynak" cols="30" rows="10"
                                               class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="destek">Okul Dışı Destek Kanalları</label>
                                     <small>Problemin çözümünde kullanılabilecek okul dışı destek kanalları neler? (İnternet bağlantıları vb.)</small>
-                                    <textarea name="destek" id="destek" cols="30" rows="10"
+                                    <textarea name="destek-kanal" id="destek" cols="30" rows="10"
                                               class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">

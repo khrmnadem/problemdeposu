@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Lecture;
+use App\OgretmenRol;
 use Illuminate\Http\Request;
 use App\Problem;
 use Illuminate\Support\Facades\Auth;
+use App\Topic;
+use App\Unite;
 
 class ProblemController extends Controller
 {
@@ -47,9 +51,9 @@ class ProblemController extends Controller
             'ders'=>'required',
             'unite'=>'required',
             'konu'=>'required',
-            'senaryo'=>'required',
-            'kaynak'=>'required',
-            'malzeme'=>'required',
+            'senaryo-baslik'=>'required',
+            'bilgi-kaynak'=>'required',
+            'bilissel-araclar'=>'required',
             'resim'=>'image|mimes:jpeg,jpg,png|max:2048'
         ],[
             'required' => 'Lütfen :attribute alanını boş bırakmayın.',
@@ -64,18 +68,43 @@ class ProblemController extends Controller
                     $file->storeAs('public\uploads', $name);
             }
         }
+
+        //önce ders oluşturalım gelen ders adına göre
+        $ders=new Lecture();
+        $ders->name=$request->input('ders');
+        $ders->save();
+
+        //unite oluşturalım
+        $unite=new Unite();
+        $unite->name=$request->input('unite');
+        $unite->save();
+
+        //konu oluşturalım
+        $konu=new Topic();
+        $konu->name=$request->input('konu');
+        $konu->save();
+
         //formdan gelen verileri veritabanına kaydedelim
         $problem=new Problem();
         $problem->user_id=Auth::id();
-        $problem->ders=$request->input('ders');
-        $problem->unite=$request->input('unite');
-        $problem->konu=$request->input('konu');
-        $problem->senaryo=$request->input('senaryo');
+
+//        $problem->ders=$request->input('ders');
+//        $problem->unite=$request->input('unite');
+//        $problem->konu=$request->input('konu');
+
+        $problem->senaryo_baslik=$request->input('senaryo-baslik');
+        $problem->senaryo_icerik=$request->input('senaryo-icerik');
         $problem->benzer=$request->input('benzer');
-        $problem->kaynak=$request->input('kaynak');
-        $problem->malzeme=$request->input('malzeme');
-        $problem->iletisim_kaynak=$request->input('iletisim-kaynak');
-        $problem->destek=$request->input('destek');
+        $problem->bilgi_kaynak=$request->input('bilgi-kaynak');
+        $problem->bilissel_araclar=$request->input('bilissel-araclar');
+
+        //ogretmen rolu kaydedelim
+        $ogretmenrol=new OgretmenRol();
+        $ogretmenrol->name=$request->input('ogretmen-rol');
+        $ogretmenrol->save();
+
+        $problem->iletisim_isbirligi_araclar=$request->input('iletisim-isbirligi-araclar');
+        $problem->destek_kanal=$request->input('destek-kanal');
         $problem->resim_yolu=trim('storage/uploads/ ').$name;
         $problem->link=$request->input('link');
         $problem->onay_say=0;

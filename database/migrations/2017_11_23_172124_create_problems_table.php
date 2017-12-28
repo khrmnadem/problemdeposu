@@ -16,15 +16,17 @@ class CreateProblemsTable extends Migration
         Schema::create('problems', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('ders');
-            $table->string('unite');
-            $table->string('konu');
-            $table->text('senaryo');
+            $table->integer('ders_id');
+            $table->integer('unite_id');
+            $table->integer('konu_id');
+            $table->string('senaryo_baslik');
+            $table->text('senaryo_icerik');
             $table->string('benzer');
-            $table->string('kaynak');
-            $table->text('malzeme');
-            $table->text('iletisim_kaynak');
-            $table->text('destek');
+            $table->string('bilgi_kaynak');
+            $table->text('bilissel_araclar');
+            $table->integer('ogretmen_rol_id');
+            $table->text('iletisim_isbirligi_araclar');
+            $table->text('destek_kanal');
             $table->integer('onay_say');
             $table->text('keywords');
             $table->string('resim_yolu');
