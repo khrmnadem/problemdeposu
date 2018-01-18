@@ -15,8 +15,8 @@ class CreateOnaysTable extends Migration
     {
         Schema::create('onays', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('problem_id');
-            $table->integer('user_id');
+            $table->integer('problem_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

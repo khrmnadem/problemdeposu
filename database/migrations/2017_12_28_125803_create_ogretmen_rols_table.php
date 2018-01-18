@@ -15,7 +15,7 @@ class CreateOgretmenRolsTable extends Migration
     {
         Schema::create('ogretmen_rols', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('problem_id');
+            $table->integer('problem_id')->nullable();
             $table->string('name');
             $table->timestamps();
         });

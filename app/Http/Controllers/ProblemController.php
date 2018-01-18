@@ -70,19 +70,20 @@ class ProblemController extends Controller
         }
 
         //önce ders oluşturalım gelen ders adına göre
-        $ders=new Lecture();
-        $ders->name=$request->input('ders');
-        $ders->save();
+
+        //konu oluşturalım
+        $konu=new Topic();
+        $konu->name=$request->input('konu');
+        $konu->save();
 
         //unite oluşturalım
         $unite=new Unite();
         $unite->name=$request->input('unite');
         $unite->save();
 
-        //konu oluşturalım
-        $konu=new Topic();
-        $konu->name=$request->input('konu');
-        $konu->save();
+        $ders=new Lecture();
+        $ders->name=$request->input('ders');
+        $ders->save();
 
         //formdan gelen verileri veritabanına kaydedelim
         $problem=new Problem();

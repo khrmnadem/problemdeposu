@@ -14,11 +14,15 @@ class CreateTopicsTable extends Migration
     public function up()
     {
         Schema::create('topics', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('ders_id');
-            $table->integer('unite_id');
+            $table->increments('id')->unsigned();
+//            $table->integer('ders_id')->unsigned();
+//            $table->integer('unite_id')->unsigned();
             $table->string('name');
             $table->timestamps();
+
+            // Foreign Keys
+//            $table->foreign('ders_id')->references('id')->on('lectures')->onDelete('cascade');
+//            $table->foreign('unite_id')->references('id')->on('unites')->onDelete('cascade');
         });
     }
 

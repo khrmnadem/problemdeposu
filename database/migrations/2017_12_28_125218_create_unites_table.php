@@ -14,11 +14,16 @@ class CreateUnitesTable extends Migration
     public function up()
     {
         Schema::create('unites', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('konu_id');
-            $table->integer('ders_id');
+            $table->increments('id')->unsigned();
+//            $table->integer('konu_id')->unsigned();
+//            $table->integer('ders_id')->unsigned();
             $table->string('name');
             $table->timestamps();
+
+
+            // Foreign Keys
+//            $table->foreign('ders_id')->references('id')->on('lectures')->onDelete('cascade');
+//            $table->foreign('konu_id')->references('id')->on('topics')->onDelete('cascade');
         });
     }
 

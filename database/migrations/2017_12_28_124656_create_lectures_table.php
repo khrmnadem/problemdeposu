@@ -14,11 +14,15 @@ class CreateLecturesTable extends Migration
     public function up()
     {
         Schema::create('lectures', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('unite_id');
-            $table->integer('konu_id');
+            $table->increments('id')->unsigned();
+//            $table->integer('unite_id')->unsigned();
+//            $table->integer('konu_id')->unsigned();
             $table->string('name');
             $table->timestamps();
+
+            // Foreign Keys
+//            $table->foreign('unite_id')->references('id')->on('unites')->onDelete('cascade');
+//            $table->foreign('konu_id')->references('id')->on('topics')->onDelete('cascade');
         });
     }
 

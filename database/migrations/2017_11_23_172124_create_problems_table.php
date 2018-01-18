@@ -14,17 +14,17 @@ class CreateProblemsTable extends Migration
     public function up()
     {
         Schema::create('problems', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('ders_id');
-            $table->integer('unite_id');
-            $table->integer('konu_id');
+            $table->increments('id')->unsinged();
+            $table->integer('user_id')->nullable();
+//            $table->integer('ders_id')->unsigned();
+//            $table->integer('unite_id')->unsigned();
+//            $table->integer('konu_id')->unsigned();
             $table->string('senaryo_baslik');
             $table->text('senaryo_icerik');
             $table->string('benzer');
             $table->string('bilgi_kaynak');
             $table->text('bilissel_araclar');
-            $table->integer('ogretmen_rol_id');
+            $table->integer('ogretmen_rol_id')->nullable();
             $table->text('iletisim_isbirligi_araclar');
             $table->text('destek_kanal');
             $table->integer('onay_say');
@@ -32,6 +32,12 @@ class CreateProblemsTable extends Migration
             $table->string('resim_yolu');
             $table->text('link');
             $table->timestamps();
+
+
+            // Foreign Keys
+//            $table->foreign('ders_id')->references('id')->on('lectures')->onDelete('cascade');
+//            $table->foreign('unite_id')->references('id')->on('unites')->onDelete('cascade');
+//            $table->foreign('konu_id')->references('id')->on('topics')->onDelete('cascade');
         });
     }
 
