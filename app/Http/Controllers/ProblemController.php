@@ -25,7 +25,14 @@ class ProblemController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['ogretmen','yonetici','hakem']);//bu sayfayı herkes görebilsin
-        return view('problem-form');
+        $dersler = Lecture::all();
+        $uniteler = Unite::all();
+        $konular = Topic::all();
+        return view('problem-form', array(
+            'dersler'=>$dersler,
+            'uniteler'=>$uniteler,
+            'konular'=>$konular
+        ));
     }
 
     /**
@@ -48,9 +55,9 @@ class ProblemController extends Controller
     {
         //form validatin
         $this->validate($request,[
-            'ders'=>'required',
-            'unite'=>'required',
-            'konu'=>'required',
+            'problem_ders_secimi'=>'required',
+            'problem_unite_secimi'=>'required',
+            'problem_konu_secimi'=>'required',
             'senaryo-baslik'=>'required',
             'bilgi-kaynak'=>'required',
             'bilissel-araclar'=>'required',
@@ -70,24 +77,30 @@ class ProblemController extends Controller
         }
 
         //önce ders oluşturalım gelen ders adına göre
-
-        //konu oluşturalım
-        $konu=new Topic();
-        $konu->name=$request->input('konu');
-        $konu->save();
-
+        //$ders=new Lecture();
+        //$ders->name=$request->input('ders');
+        //$ders->save();
+        
         //unite oluşturalım
-        $unite=new Unite();
-        $unite->name=$request->input('unite');
-        $unite->save();
-
-        $ders=new Lecture();
-        $ders->name=$request->input('ders');
-        $ders->save();
-
+        //$unite=new Unite();
+        //$unite->name=$request->input('unite');
+        //$unite->lecture_id = Lecture::orderBy('updated_at', 'desc')->first()->id;
+        //$unite->save();
+        
+        //konu oluşturalım
+        //$konu=new Topic();
+        //$konu->name=$request->input('konu');
+        //$konu->lecture_id=Lecture::orderBy('updated_at', 'desc')->first()->id;
+        //$konu->unite_id=Unite::orderBy('updated_at','desc')->first()->id;
+        //$konu->save();
+        
         //formdan gelen verileri veritabanına kaydedelim
         $problem=new Problem();
         $problem->user_id=Auth::id();
+        //önemli şeyler: son eklenen şeyi alıp problemin gerekli idlerine atıyor
+        $problem->lecture_id=$request->input('problem_ders_secimi');
+        $problem->unite_id=$request->input('problem_unite_secimi');
+        $problem->topic_id=$request->input('problem_konu_secimi');
 
 //        $problem->ders=$request->input('ders');
 //        $problem->unite=$request->input('unite');

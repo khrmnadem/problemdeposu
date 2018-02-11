@@ -15,8 +15,7 @@ class CreateUnitesTable extends Migration
     {
         Schema::create('unites', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-//            $table->integer('konu_id')->unsigned();
-//            $table->integer('ders_id')->unsigned();
+            $table->integer('lecture_id');
             $table->string('name');
             $table->timestamps();
 

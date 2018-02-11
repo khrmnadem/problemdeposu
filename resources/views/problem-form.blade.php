@@ -28,15 +28,27 @@
                                 <div class="col-md-10 col-md-offset-1">
                                 <div class="form-group">
                                     <label for="ders">Ders</label>
-                                    <input class="form-control" type="text" name="ders" id="ders">
+                                    <select name="problem_ders_secimi">
+                                        @foreach($dersler as $ders)
+                                        <option value="{{$ders->id}}">{{$ders->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="unite">Ünite</label>
-                                    <input class="form-control" type="text" name="unite" id="unite">
+                                    <label for="ders">Ünite</label>
+                                    <select name="problem_unite_secimi">
+                                        @foreach($uniteler as $unite)
+                                        <option value="{{$unite->id}}">{{$unite->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="konu">Konu</label>
-                                    <input class="form-control" type="text" name="konu" id="konu">
+                                    <label>Konu</label>
+                                    <select name="problem_konu_secimi">
+                                        @foreach($konular as $konu)
+                                        <option value="{{$konu->id}}">{{$konu->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="senaryo-baslik">Problem Senaryosunun Başlığı</label>

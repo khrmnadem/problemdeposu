@@ -10,11 +10,11 @@
                     <div class="panel panel-body">
                         <ul>
                             @foreach($problems as $problem)
-                            <li><a href="#">{{$problem->ders}}</a>
+                            <li><a href="#">{{$problem->lecture->name}}</a>
                                 <ul>
-                                    <li><a href="#">{{$problem->unite}}</a>
+                                    <li>{{$problem->unite->name}}
                                         <ul>
-                                            <li><a href="#">{{$problem->konu}}</a></li>
+                                            <li>{{$problem->topic->name}}</li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -72,6 +72,9 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <pre>
+                                {{$problems}}
+                            </pre>
                         </div>
                     </div>
                 </div>

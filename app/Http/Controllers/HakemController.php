@@ -92,8 +92,10 @@ class HakemController extends Controller
     }
 
     public function problemList(){
-
-
+        //Problemler veritabanından çekilecek
+        $problems = new Problem();
+        $datalist = $problems->where('onay_say', '<', 2)->get();
+        return view('onaylanacak-problemler', array('problems'=>$datalist));
     }
 
     public function onayla(Request $request){

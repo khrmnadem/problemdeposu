@@ -15,8 +15,6 @@ class CreateLecturesTable extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-//            $table->integer('unite_id')->unsigned();
-//            $table->integer('konu_id')->unsigned();
             $table->string('name');
             $table->timestamps();
 

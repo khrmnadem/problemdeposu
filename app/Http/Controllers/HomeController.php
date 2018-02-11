@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Problem;
+use App\Lecture;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -30,7 +31,8 @@ class HomeController extends Controller
         //Problemler veritabanından çekilecek
         $problems = new Problem();
         $id = Auth::id();
-        $datalist = $problems->where('user_id', $id)->get();
+        $datalist = $problems->where('user_id', $id)->with(array('lecture', 'unite', 'topic'))->get();
+        $dersler = Lecture::with(array('unites','topics'));
         if($id == 1){
             return redirect('yonetim');
         }else {

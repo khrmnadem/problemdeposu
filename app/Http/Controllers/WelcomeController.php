@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Problem;
 use App\Onay;
+use App\Lecture;
+use App\Unite;
 
 class WelcomeController extends Controller
 {
@@ -15,10 +17,18 @@ class WelcomeController extends Controller
      */
     public function index()
     {
+        //Menüde listeletmek için dersleri çekelim --> beraberinde unite ve topicler de gelir
+        $dersler= Lecture::with(array('unites','topics'))->get();
+        
+        $biriktir = array();
         //Onay sayısı 2 den büyük ve eşit olanları datalist değişkenine aktar
-        $datalist = Problem::where('onay_say', '>=', 2)->with('onays')->get();
+        $datalist = Problem::where('onay_say', '>=', 2)->with(array('onays', 'lecture', 'unite', 'topic'))->get();
+        foreach ($datalist as $data){
+            $biriktir = push_array('biriktir')
+        }
         return view('welcome', array(
-            'problems'=>$datalist
+            'problems'=>$datalist,
+            'dersler'=>$dersler,
         ));
     }
 

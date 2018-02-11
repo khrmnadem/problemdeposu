@@ -9,7 +9,7 @@
                         <div class="panel panel-heading">İşlemler</div>
                         <div class="panel panel-body">
                             <ul>
-                                <li><a href="ders-ekle">Ders Ekle</a></li>                                <li><a href="ders-ekle">Ders Ekle</a></li>
+                                <li><a href="ders-ekle">Ders Ekle</a></li>
                                 <li><a href="unite-ekle">Ünite Ekle</a></li>
                                 <li><a href="konu-ekle">Konu Ekle</a></li>
                                 <li><a href="kullanici-ekle">Kullanıcı Ekle</a></li>
@@ -33,7 +33,17 @@
                         @endif
 
                         <div class="col-md-10 col-md-offset-1">
-
+                            <form class="form-horizontal" action="ders-ekle" method="POST">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <label>Ders Adı</label>
+                                    <input class="form-control" type="text" name="ders_adi">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input class="form-control btn btn-primary" type="submit" value="Ekle">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

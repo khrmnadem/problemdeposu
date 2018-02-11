@@ -16,9 +16,9 @@
 
                     <div class="col-md-10 col-md-offset-1">
                         @foreach($datalist as $data)
-                        <h4><b>Ders:</b> {{$data->ders}}</h4>
-                        <h5><b>Ünite:</b> {{$data->unite}}</h5>
-                        <h6><b>Konu:</b> {{$data->konu}}</h6>
+                        <h4><b>Ders:</b> {{$data->lecture->name}}</h4>
+                        <h5><b>Ünite:</b> {{$data->unite->name}}</h5>
+                        <h6><b>Konu:</b> {{$data->topic->name}}</h6>
                         <p><b>Problem Senaryosu:</b> {{$data->senaryo}}</p>
                         @if($data->resim_yolu != 'storage/uploads/')
                         <b>Problem Resmi: </b><img class="thumbnail" src="{{url($data->resim_yolu)}}" alt="Açıklama Resmi">

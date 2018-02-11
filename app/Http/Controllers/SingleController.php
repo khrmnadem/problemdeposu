@@ -14,7 +14,7 @@ class SingleController extends Controller
      */
     public function index($id)//id değişkeni problem idsini belirtir
     {
-        $problem = Problem::where('id', '=', $id)->with('user')->get();
+        $problem = Problem::where('id', '=', $id)->with(array('user', 'lecture', 'unite', 'topic'))->get();
         return view('single', array(
             'problem' => $problem
         ));

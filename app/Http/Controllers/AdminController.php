@@ -6,6 +6,9 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 use App\Problem;
+use App\Lecture;
+use App\Topic;
+use App\Unite;
 class AdminController extends Controller
 {
     /**
@@ -114,8 +117,60 @@ class AdminController extends Controller
     public function problemList(Request $request){
         $request->user()->authorizeRoles(['yonetici']);
         $problems = Problem::with('user')->get();
+        $dersler = Lecture::with('unites','topics');//dersleri topicler  ve unitelerle çektik
         return view('problem-listesi', array(
-            'problems'=>$problems
+            'problems'=>$problems,
+            'dersler'=>$dersler
         ));
+    }
+    
+    public function createLecture(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);//sadece yoneticiler gorebilir
+        return view('ders-ekle');
+    }
+    
+    public function createUnite(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);//sadece yoneticiler gorebilir
+        $dersler = Lecture::all();
+        return view('unite-ekle', array(
+            'dersler' => $dersler
+        ));
+    }
+    
+    public function createTopic(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);//sadece yoneticiler gorebilir
+        $dersler = Lecture::all();
+        $uniteler = Unite::all();
+        return view('konu-ekle', array(
+            'dersler'=>$dersler,
+            'uniteler'=>$uniteler            
+        ));
+    }
+    
+    public function storeLecture(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);
+        $lecture = new Lecture();
+        $lecure->name = $request->input('ders_adi');
+        $lecture->save();
+        return redirect('/ders-ekle');
+    }
+    
+    public function storeUnite(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);
+        $unite = new Unite();
+        $unite->name = $request->input('unite_adi');
+        $unite->lecture_id = $request->input('unite_ders_secimi');
+        $unite->save();
+        return redirect('/unite-ekle');
+    }
+    
+    public function storeTopic(Request $request){
+        $request->user()->authorizeRoles(['yonetici']);
+        $topic = new Topic();
+        $topic->name = $request->input('konu_adi');
+        $topic->unite_id = $request->input('konu_unite_secimi');
+        $topic->lecture_id = $request->input('konu_ders_secimi');
+        $topic->save();
+        return redirect('/konu-ekle');
     }
 }
