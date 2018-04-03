@@ -30,3 +30,18 @@ Route::get('/hakem', array('as'=>'hakem', 'uses'=>'HakemController@index'));
 Route::get('/onay', array('as'=>'onay', 'uses'=>'HakemController@problemList'));
 Route::post('/onay', array('as'=>'onayla', 'uses'=>'HakemController@onayla'));
 Route::get('/problem/{id}', array('as' => 'problem', 'uses'=>'SingleController@index'));
+
+Route::get('/ders-ekle', array('as' => 'ders-ekle', 'uses' => 'CatController@dersForm'));
+Route::get('/unite-ekle', array('as' => 'unite-ekle', 'uses' => 'CatController@uniteForm'));
+Route::get('/konu-ekle', array('as' => 'konu-ekle', 'uses' => 'CatController@konuForm'));
+
+Route::post('/ders-ekle', array('as' => 'ders-ekle', 'uses' => 'CatController@dersEkle'));
+Route::post('/unite-ekle', array('as' => 'unite-ekle', 'uses' => 'CatController@uniteEkle'));
+Route::post('/konu-ekle', array('as' => 'konu-ekle', 'uses' => 'CatController@konuEkle'));
+
+Route::get('/duzenle/{id}', array('as' => 'duzenle', 'uses' => 'SingleController@edit'));
+Route::post('duzenle/{id}', array('as' => 'guncelle', 'uses' => 'SingleController@update'));
+
+Route::get('/sil/{id}', array('as' => 'sil', 'uses' => 'SingleController@destroy'));
+
+Route::get('/kategori/{id}', array('as'=>'kategori', 'uses'=> 'CatController@show'));

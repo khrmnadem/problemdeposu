@@ -4,15 +4,8 @@
     <div class="container">
         <h1>Ana Sayfa</h1>
         <div class="row">
-            <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel panel-heading">Menü</div>
-                    <div class="panel panel-body menu-div" id="menu">
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
+            
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Tüm Problemler</div>
 
@@ -27,9 +20,6 @@
                             <table id="kullanici-listesi" class="display" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Ders</th>
-                                    <th>Ünite</th>
-                                    <th>Konu</th>
                                     <th>Senaryo</th>
                                     <th>Kim Yazdı</th>
                                     <th>Problemi Gör</th>
@@ -37,25 +27,22 @@
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Ders</th>
-                                    <th>Ünite</th>
-                                    <th>Konu</th>
                                     <th>Senaryo</th>
                                     <th>Kim Yazdı</th>
                                     <th>Problemi Gör</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                @foreach($problems as $problem)
+                                @foreach($kategoriler as $kategori)
                                     <tr>
-                                        @foreach($problem->cats as $cat)
-                                        <td>{{$cat->name}}</td>
+                                        @foreach($kategori->problems as $problem)
+                                            
                                         @endforeach
                                         <td>{{str_limit($problem->senaryo, 35)}}</td>
                                         <td>
                                             {{$problem->user->name}}
                                         </td>
-                                        <td><a href="problem/{{$problem->id}}" class="btn btn-primary">Problemi Gör</a></td>
+                                        <td><a href="{{url("problem/{$problem->id}")}}" class="btn btn-primary">Problemi Gör</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

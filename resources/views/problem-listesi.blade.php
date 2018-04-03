@@ -9,6 +9,9 @@
                         <div class="panel panel-heading">İşlemler</div>
                         <div class="panel panel-body">
                             <ul>
+                                <li><a href="ders-ekle">Ders Ekle</a></li>
+                                <li><a href="unite-ekle">Ünite Ekle</a></li>
+                                <li><a href="konu-ekle">Konu Ekle</a></li>
                                 <li><a href="kullanici-ekle">Kullanıcı Ekle</a></li>
                                 <li><a href="kullanici-listesi">Kullanıcı Listesi</a></li>
                                 <li><a href="problem-listesi">Problem Listesi</a></li>
@@ -54,9 +57,9 @@
                                 <tbody>
                                     @foreach($problems as $problem)
                                     <tr>
-                                        <td>{{$problem->ders}}</td>
-                                        <td>{{$problem->unite}}</td>
-                                        <td>{{$problem->konu}}</td>
+                                        @foreach($problem->cats as $cat)
+                                        <td>{{$cat->name}}</td>
+                                        @endforeach
                                         <td>{{str_limit($problem->senaryo, 35)}}</td>
                                         <td>
                                             {{$problem->user->name}}

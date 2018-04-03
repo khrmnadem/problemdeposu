@@ -33,7 +33,24 @@
                         @endif
 
                         <div class="col-md-10 col-md-offset-1">
-
+                            <form class="form-horizontal" action="konu-ekle" method="POST">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <label>Konu Adı</label>
+                                    <input class="form-control" type="text" name="konu_adi">
+                                </div>
+                                <div class="form-group">
+                                    <label>Konunun Ait Olduğu Ünite</label>
+                                    <select class="form-control" name="konu_unite_id">
+                                        @foreach($uniteler as $unite)
+                                        <option value="{{$unite->id}}">{{$unite->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control btn btn-primary" type="submit" value="Ekle">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

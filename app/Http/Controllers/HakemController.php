@@ -94,7 +94,7 @@ class HakemController extends Controller
     public function problemList(){
         //Problemler veritabanından çekilecek
         $problems = new Problem();
-        $datalist = $problems->where('onay_say', '<', 2)->get();
+        $datalist = $problems->where('onay_say', '<', 2)->with('cats')->get();
         return view('onaylanacak-problemler', array('problems'=>$datalist));
     }
 

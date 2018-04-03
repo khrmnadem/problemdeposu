@@ -53,9 +53,9 @@
                                 <tbody>
                                 @foreach($problems as $problem)
                                     <tr>
-                                        <td>{{$problem->ders}}</td>
-                                        <td>{{$problem->unite}}</td>
-                                        <td>{{$problem->konu}}</td>
+                                        @foreach($problem->cats as $cat)
+                                        <td>{{$cat->name}}</td>
+                                        @endforeach
                                         <td>{{str_limit($problem->senaryo, 35)}}</td>
                                         <td>
                                             {{$problem->user->name}}

@@ -105,7 +105,13 @@
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
+            $('#menu-ul').hide();
+            
             $('#kullanici-listesi').DataTable();
+            
+            var veri = document.getElementById("menu-ul").innerHTML;
+            document.getElementById("menu").innerHTML = veri;
+            
         } );
     </script>
 </body>

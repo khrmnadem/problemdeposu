@@ -10,9 +10,17 @@
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
                                 @foreach($problem as $problem)
-                                    <h4><b>Ders:</b> {{$problem->ders}}</h4>
-                                    <h5><b>Ünite:</b> {{$problem->unite}}</h5>
-                                    <h6><b>Konu:</b> {{$problem->konu}}</h6>
+                                    @foreach($problem->cats as $cat)
+                                        @if($cat->type == "Ders")
+                                        <h4><b>Ders:</b> {{$cat->name}}</h4>
+                                        @endif
+                                        @if($cat->type == "Ünite")
+                                        <h5><b>Ünite:</b> {{$cat->name}}</h5>
+                                        @endif
+                                        @if($cat->type == "Konu")
+                                        <h6><b>Konu:</b> {{$cat->name}}</h6>
+                                        @endif
+                                    @endforeach
                                     <p><b>Problem Senaryosu:</b> {{$problem->senaryo}}</p>
                                     @if($problem->resim_yolu != 'storage/uploads/')
                                         <b>Problem Resmi: </b><img class="thumbnail" src="{{url($problem->resim_yolu)}}" alt="Açıklama Resmi">

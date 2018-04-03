@@ -113,7 +113,7 @@ class AdminController extends Controller
 
     public function problemList(Request $request){
         $request->user()->authorizeRoles(['yonetici']);
-        $problems = Problem::with('user')->get();
+        $problems = Problem::with('user', 'cats')->get();
         return view('problem-listesi', array(
             'problems'=>$problems
         ));

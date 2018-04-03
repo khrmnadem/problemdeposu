@@ -15,4 +15,8 @@ class Problem extends Model
     public function onays(){
         return $this->hasMany('App\Onay');
     }
+    
+    public function cats(){
+        return $this->belongsToMany('App\Cat');
+    }
 }

@@ -16,9 +16,9 @@ class CreateProblemsTable extends Migration
         Schema::create('problems', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('ders');
-            $table->string('unite');
-            $table->string('konu');
+            //$table->string('ders');
+            //$table->string('unite');
+            //$table->string('konu');
             $table->text('senaryo');
             $table->string('benzer');
             $table->string('kaynak');

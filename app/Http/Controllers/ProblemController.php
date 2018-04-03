@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Problem;
+use App\Cat;
 use Illuminate\Support\Facades\Auth;
 
 class ProblemController extends Controller
@@ -21,7 +22,14 @@ class ProblemController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['ogretmen','yonetici','hakem']);//bu sayfayı herkes görebilsin
-        return view('problem-form');
+        $dersler = Cat::where('type','=','Ders')->get();
+        $uniteler = Cat::where('type','=','Ünite')->get();
+        $konular = Cat::where('type','=','Konu')->get();
+        return view('problem-form', array(
+            'dersler'=>$dersler,
+            'uniteler'=>$uniteler,
+            'konular'=>$konular
+        ));
     }
 
     /**
@@ -44,9 +52,6 @@ class ProblemController extends Controller
     {
         //form validatin
         $this->validate($request,[
-            'ders'=>'required',
-            'unite'=>'required',
-            'konu'=>'required',
             'senaryo'=>'required',
             'kaynak'=>'required',
             'malzeme'=>'required',
@@ -67,9 +72,9 @@ class ProblemController extends Controller
         //formdan gelen verileri veritabanına kaydedelim
         $problem=new Problem();
         $problem->user_id=Auth::id();
-        $problem->ders=$request->input('ders');
-        $problem->unite=$request->input('unite');
-        $problem->konu=$request->input('konu');
+        //$problem->ders=$request->input('ders');
+        //$problem->unite=$request->input('unite');
+        //$problem->konu=$request->input('konu');        
         $problem->senaryo=$request->input('senaryo');
         $problem->benzer=$request->input('benzer');
         $problem->kaynak=$request->input('kaynak');
@@ -82,6 +87,20 @@ class ProblemController extends Controller
         $problem->keywords=$request->input('keywords');
         //kaydetmeyi unutmayalım !!!!
         $problem->save();
+        
+        $prob = Problem::orderBy('updated_at', 'desc')->first();
+        $ders_id = $request->input('problem_ders');
+        $unite_id = $request->input('problem_unite');
+        $konu_id = $request->input('problem_konu');
+        //dersle ilişkisi
+        $cat_ders = Cat::where('id','=',$ders_id)->get();
+        $prob->cats()->attach($cat_ders);
+        //uniteyle ilişkisi
+        $cat_unite = Cat::where('id','=',$unite_id)->get();
+        $prob->cats()->attach($cat_unite);
+        //Konuyla ilişkisi
+        $cat_konu = Cat::where('id','=',$konu_id)->get();
+        $prob->cats()->attach($cat_konu);
         return redirect('/home');
     }
 

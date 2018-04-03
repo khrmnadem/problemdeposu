@@ -16,9 +16,17 @@
 
                     <div class="col-md-10 col-md-offset-1">
                         @foreach($datalist as $data)
-                        <h4><b>Ders:</b> {{$data->ders}}</h4>
-                        <h5><b>Ünite:</b> {{$data->unite}}</h5>
-                        <h6><b>Konu:</b> {{$data->konu}}</h6>
+                        @foreach($data->cats as $cat)
+                            @if($cat->type == "Ders")
+                            <h4><b>Ders:</b> {{$cat->name}}</h4>
+                            @endif
+                            @if($cat->type == "Ünite")
+                            <h5><b>Ünite:</b> {{$cat->name}}</h5>
+                            @endif
+                            @if($cat->type == "Konu")
+                            <h6><b>Konu:</b> {{$cat->name}}</h6>
+                            @endif
+                        @endforeach
                         <p><b>Problem Senaryosu:</b> {{$data->senaryo}}</p>
                         @if($data->resim_yolu != 'storage/uploads/')
                         <b>Problem Resmi: </b><img class="thumbnail" src="{{url($data->resim_yolu)}}" alt="Açıklama Resmi">
@@ -39,6 +47,9 @@
                         @foreach($keywords as $keyword)
                                 <label class="label label-warning">{{$keyword}}</label>
                         @endforeach
+                        <br><br>
+                        <a href="duzenle/{{$data->id}}" class="btn btn-primary">Problemi Düzenle</a>
+                        <a href="sil/{{$data->id}}" class="btn btn-danger">Problemi Sil</a>
                         <hr>
                         @endforeach
                     </div>

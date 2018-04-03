@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Problem;
 use App\Onay;
+use App\Cat;
 
 class WelcomeController extends Controller
 {
@@ -13,15 +14,25 @@ class WelcomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    public function index($parentId=0)
     {
+        $cats = Cat::where('parent_id','=',$parentId)->with('problems')->get();
+        
+        echo "<ul class='menu' id='menu-ul'>";
+            foreach($cats as $cat){
+                echo "<li><a href='".url('kategori/'.$cat->id)."'>".$cat->name."</a></li>";
+                $this->index($cat->id);
+            }
+        echo "</ul>";
+        
         //Onay sayısı 2 den büyük ve eşit olanları datalist değişkenine aktar
-        $datalist = Problem::where('onay_say', '>=', 2)->with('onays')->get();
+        $datalist = Problem::where('onay_say', '>=', 2)->with('onays', 'cats')->get();
         return view('welcome', array(
             'problems'=>$datalist
         ));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

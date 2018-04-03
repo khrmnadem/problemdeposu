@@ -30,7 +30,7 @@ class HomeController extends Controller
         //Problemler veritabanından çekilecek
         $problems = new Problem();
         $id = Auth::id();
-        $datalist = $problems->where('user_id', $id)->get();
+        $datalist = $problems->where('user_id', $id)->with('cats')->get();
         if($id == 1){
             return redirect('yonetim');
         }else {

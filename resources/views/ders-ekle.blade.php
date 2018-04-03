@@ -33,7 +33,16 @@
                         @endif
 
                         <div class="col-md-10 col-md-offset-1">
-
+                            <form class="form-horizontal" action="ders-ekle" method="POST">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <label>Ders</label>
+                                    <input class="form-control" type="text" name="ders_adi">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control btn btn-primary" type="submit" value="Ekle">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
